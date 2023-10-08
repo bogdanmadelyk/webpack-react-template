@@ -1,3 +1,3 @@
 import {func} from './test'
 
-func()
+func('HI!')
