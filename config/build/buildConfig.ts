@@ -3,9 +3,11 @@ import webpack from 'webpack';
 import {BuildOptions} from './types';
 import {buildPlugins} from './buildPlugins';
 import {buildLoaders} from './buildLoaders';
+import {buildResolvers} from './buildResolvers';
+import {buildDevServer} from './buildDevServer';
 
 
-export const buildConfig = (options: BuildOptions) => {
+export const buildConfig = (options: BuildOptions): webpack.Configuration => {
 
 	const {
 		paths,
@@ -21,12 +23,11 @@ export const buildConfig = (options: BuildOptions) => {
 			filename: '[name].[contenthash].js',
 			clean: true
 		},
-		resolve: {
-			extensions: ['.tsx', '.ts', '.js'],
-		},
+		resolve: buildResolvers(),
 		module: {
 			rules: buildLoaders()
 		},
-		plugins: buildPlugins(options)
+		plugins: buildPlugins(options),
+		devServer: buildDevServer(options)
 	};
 }
