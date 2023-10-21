@@ -14,18 +14,18 @@ export const buildLoaders = (options: BuildOptions) => {
 				loader: 'file-loader',
 			},
 		],
-	}
+	};
 
 	const svgLoader = {
 		test: /\.svg$/,
 		use: ['@svgr/webpack'],
-	}
+	};
 
 	const tsLoader = {
 		test: /\.tsx?$/,
 		use: 'ts-loader',
 		exclude: /node_modules/,
-	}
+	};
 
 	const cssLoader = {
 		test: /\.s[ac]ss$/i,
@@ -42,7 +42,7 @@ export const buildLoaders = (options: BuildOptions) => {
 			},
 			'sass-loader'
 		]
-	}
+	};
 
 	const babelLoader = {
 		test: /\.(js|jsx|ts|tsx)$/,
@@ -51,14 +51,14 @@ export const buildLoaders = (options: BuildOptions) => {
 			loader: 'babel-loader',
 			options: {
 				presets: [
-					['@babel/preset-env', { targets: "defaults" }]
+					['@babel/preset-env', {targets: 'defaults'}]
 				],
 				plugins: [
 					isDev && 'react-refresh/babel'
 				].filter(Boolean)
 			}
 		}
-	}
+	};
 
 	return [
 		fileLoader,
@@ -66,5 +66,5 @@ export const buildLoaders = (options: BuildOptions) => {
 		babelLoader,
 		tsLoader,
 		cssLoader,
-	]
-}
+	];
+};

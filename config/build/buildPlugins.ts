@@ -4,16 +4,22 @@ import {BuildOptions} from './types';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 
-export const buildPlugins = (options: BuildOptions): webpack.WebpackPluginInstance[]  => {
+export const buildPlugins = (options: BuildOptions): webpack.WebpackPluginInstance[] => {
+
+	const {
+		isDev,
+		paths
+	} = options;
+
 	return [
 		new HTMLWebpackPlugin({
-			template: options.paths.html
+			template: paths.html
 		}),
 		new webpack.ProgressPlugin(),
 		new MiniCssExtractPlugin({
-			filename: options.isDev ? 'css/[name].css' : 'css/[name].[contenthash:8].css',
-			chunkFilename: options.isDev ? 'css/[id].css' : 'css/[name].[contenthash:8].css',
+			filename: isDev ? 'css/[name].css' : 'css/[name].[contenthash:8].css',
+			chunkFilename: isDev ? 'css/[id].css' : 'css/[name].[contenthash:8].css',
 		}),
-		options.isDev && new ReactRefreshWebpackPlugin()
-	].filter(Boolean)
-}
+		isDev && new ReactRefreshWebpackPlugin()
+	].filter(Boolean);
+};
