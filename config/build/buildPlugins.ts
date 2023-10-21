@@ -2,6 +2,7 @@ import HTMLWebpackPlugin from 'html-webpack-plugin';
 import webpack from 'webpack';
 import {BuildOptions} from './types';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 
 export const buildPlugins = (options: BuildOptions): webpack.WebpackPluginInstance[]  => {
 	return [
@@ -12,6 +13,7 @@ export const buildPlugins = (options: BuildOptions): webpack.WebpackPluginInstan
 		new MiniCssExtractPlugin({
 			filename: options.isDev ? 'css/[name].css' : 'css/[name].[contenthash:8].css',
 			chunkFilename: options.isDev ? 'css/[id].css' : 'css/[name].[contenthash:8].css',
-		})
-	]
+		}),
+		options.isDev && new ReactRefreshWebpackPlugin()
+	].filter(Boolean)
 }
