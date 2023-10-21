@@ -1,4 +1,3 @@
-import HTMLWebpackPlugin from 'html-webpack-plugin';
 import webpack from 'webpack';
 import {BuildOptions} from './types';
 import {buildPlugins} from './buildPlugins';
